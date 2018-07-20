@@ -8,19 +8,32 @@ function modify($modify){
  return $modified;
 }
 
+// connecting and selecting the database
+mysql_connect("localhost","root","");
+mysql_select_db("learning");
+
+$select2="select * from add_country";
+$query3=mysql_query($select2) or die(mysql_error());
+
+	echo "<b>ALREDAY AVAILABLE COUNTRY IN DATABASE</b>";
+	echo "<br>";
+while ($row=mysql_fetch_assoc($query3)) {
+	
+	echo $row['country'];
+	echo "<br>";
+}
+echo "<br>";
+echo "REFERSH TO ADD RECENTLY ADDED COUNTRY NAME";
+echo "<br><br>";
 extract($_POST);
 	if (isset($add)) {
 		if (!empty($country)) {
-			$con=mysql_connect("localhost","root","");
-			if ($con) {
-				$db=mysql_select_db("learning");
-				if ($db) {
 					
 					$select="select * from add_country where country='".modify($country)."'";
 					$query1=mysql_query($select) or die(mysql_error());
 					$count=mysql_num_rows($query1);
 					if ($count>0) {
-						echo "COUNTRY NAME IS ALREDAY PRESENT";
+						echo "<b>WARNING : </b> COUNTRY NAME IS ALREADY PRESENT";
 						echo "<br>";
 						echo "TRY ANOTHER COUNTRY NAME";
 						echo "<br><br><br>";
@@ -36,12 +49,7 @@ extract($_POST);
 					  	}
 					}
 				  }
-				}
 			
-			else{
-				echo "error in connecting database";
-			}
-		}
 	else{
 		echo "invalid country name";
 	}
