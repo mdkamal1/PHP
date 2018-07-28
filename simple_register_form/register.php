@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 
 function modifyvar($modify){
 	$modified=ucfirst(strtolower(strip_tags(addslashes(trim($modify)))));
@@ -13,6 +13,7 @@ function modifyvar($modify){
 if (isset($admin)) {
 		
 		if ($admin_password=='admin123') {
+			session_start();
 			$_SESSION['adminname']='Admin Page';
 			header("location:admin.php?admin_logged_in");
 		}else{
@@ -30,6 +31,8 @@ if (isset($admin)) {
 			$sel_count=mysql_num_rows($sel_res);
 			$row=mysql_fetch_assoc($sel_res);
 			if ($sel_count==1) {
+
+				session_start();
 					$_SESSION['name'] = $row['uname'];
 					$_SESSION['user_id'] = $row['id'];
 					// print_r ($_SESSION);

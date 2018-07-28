@@ -23,7 +23,7 @@ if (isset($_SESSION['adminname'])) {
  		<th>Gender</th>
  		<th>Country</th>
  		<th>Language</th>		
- 		<th>QUERY</th>		
+ 		<th colspan="2">ACTION</th>		
  	</tr>
  			<?php 
  				require("dbconnect.php");
@@ -48,7 +48,10 @@ if (isset($_SESSION['adminname'])) {
 								<td><?php echo $row['country']; ?></td>
 								<td><?php echo $row['language']; ?></td>
 								<td>
-									<button><a href="delete.php?uid=<?php echo $row['id'] ?>">DELETE</a></button>
+									<button><a href="admin_delete.php?uid=<?php echo $row['id']; ?>">DELETE</a></button>
+								</td>
+								<td>	
+									<button><a href="admin_update.php?uid=<?php echo $row['id']; ?>">UPDATE</a></button>
 								</td>
 							</tr>
  							<?php
@@ -69,7 +72,7 @@ if (isset($_SESSION['adminname'])) {
 <?php 
 }
 else{
-	echo "invalid request";
+	header("location:register.php");
 }
 
  ?>
